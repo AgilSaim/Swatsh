@@ -29,12 +29,11 @@ if( isset($_POST['submit']) ){
                     //hashing password sebelum disimpan didatabase
                     $pass  = password_hash($password, PASSWORD_DEFAULT);
                     //insert data ke database
-                    $query = "INSERT INTO users (username,name,email, password ) VALUES ('$username','$nama','$email','$pass')";
+                    $query = "INSERT INTO users (username,name,email, password ) VALUES ('$username','$name','$email','$pass')";
                     $result   = mysqli_query($con, $query);
                     //jika insert data berhasil maka akan diredirect ke halaman index.php serta menyimpan data username ke session
                     if ($result) {
                         $_SESSION['username'] = $username;
-                        
                         header('Location: index.php');
                      
                     //jika gagal maka akan menampilkan pesan error
@@ -54,8 +53,8 @@ if( isset($_POST['submit']) ){
     } 
     //fungsi untuk mengecek username apakah sudah terdaftar atau belum
     function cek_nama($username,$con){
-        $nama = mysqli_real_escape_string($con, $username);
-        $query = "SELECT * FROM users WHERE username = '$nama'";
+        $name = mysqli_real_escape_string($con, $username);
+        $query = "SELECT * FROM users WHERE username = '$name'";
         if( $result = mysqli_query($con, $query) ) return mysqli_num_rows($result);
     }
 ?>
@@ -66,11 +65,32 @@ if( isset($_POST['submit']) ){
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Register</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- 
-<!-- costum css -->
-<link rel="stylesheet" href="style.css">
+
+<style>
+    /* mengatur warna backgroud dan padding pada tag body bagian atas agar form tidak menempel diatas */
+body {
+    background-image: url('img/BG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 5vh;
+    font-family: 'comic sans ms';
+}
+
+/* mengatur warna backgroud form */
+form {
+    background: #EEEEEE;
+}
+
+/* mengatur border dan padding class form-container */
+.form-container {
+    border-radius: 10px;
+    padding: 30px;
+}
+</style>
 </head>
 <body>
         <section class="container-fluid mb-4">
@@ -78,7 +98,7 @@ if( isset($_POST['submit']) ){
             <section class="row justify-content-center">
             <section class="col-12 col-sm-6 col-md-4">
                 <form class="form-container" action="register.php" method="POST">
-                    <h4 class="text-center font-weight-bold"> Sign-Up </h4>
+                    <h1 class="text-center font-weight-bold"> Sign-Up </h1>
                     <?php if($error != ''){ ?>
                         <div class="alert alert-danger" role="alert"><?= $error; ?></div>
                     <?php } ?>

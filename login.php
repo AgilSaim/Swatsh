@@ -12,7 +12,7 @@ if( isset($_SESSION['username']) ) header('Location: index.php');
  
 //mengecek apakah form disubmit atau tidak
 if( isset($_POST['submit']) ){
-         
+        
         // menghilangkan backshlases
         $username = stripslashes($_POST['username']);
         //cara sederhana mengamankan dari sql injection
@@ -50,19 +50,39 @@ if( isset($_POST['submit']) ){
  
 ?>
  
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>LogIn</title>
   
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- 
-<!-- costum css -->
-<link rel="stylesheet" href="style.css">
+
+<style>
+    /* mengatur warna backgroud dan padding pada tag body bagian atas agar form tidak menempel diatas */
+body {
+    background-image: url('img/BG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 20vh;
+    font-family: 'comic sans ms';
+}
+
+/* mengatur warna backgroud form */
+form {
+    background: #EEEEEE;
+}
+
+/* mengatur border dan padding class form-container */
+.form-container {
+    border-radius: 10px;
+    padding: 30px;
+}
+</style>
 </head>
 <body>
         <section class="container-fluid mb-4">
@@ -70,7 +90,7 @@ if( isset($_POST['submit']) ){
             <section class="row justify-content-center">
             <section class="col-12 col-sm-6 col-md-4">
                 <form class="form-container" action="login.php" method="POST">
-                    <h4 class="text-center font-weight-bold"> Sign-In </h4>
+                    <h1 class="text-center font-weight-bold"> Sign-In </h1>
                     <?php if($error != ''){ ?>
                         <div class="alert alert-danger" role="alert"><?= $error; ?></div>
                     <?php } ?>
